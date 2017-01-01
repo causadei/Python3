@@ -1,7 +1,7 @@
 kadi = input("Kullanıcı Adı Girin: ")
 sifre = input("Sifre Girin: ")
 
-dosya = open("deneme.txt")
+dosya = open("login.txt")
 a = dosya.read()
 
 if kadi in a and sifre in a:
