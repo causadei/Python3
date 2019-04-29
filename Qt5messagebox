@@ -1,8 +1,17 @@
 from PyQt5 import QtCore, QtGui, QtWidgets
 import pypyodbc
-
+from anaform import Ui_MainWindow
 
 class Ui_Dialog(object):
+
+
+    def openwindow(self):
+        self.window = QtWidgets.QMainWindow()
+        self.ui = Ui_MainWindow()
+        self.ui.setupUi(self.window)
+        Dialog.hide()
+        self.window.show()
+
 
     def hatamesaji(self,hatabaslik = "Uyarı",hatamesaj= "SQL bağlantısı sağlanamadı"):
         hata = QtWidgets.QMessageBox()
@@ -18,6 +27,7 @@ class Ui_Dialog(object):
         baglantimesaji.setWindowTitle(baslik)
         baglantimesaji.setText(mesaj)
         baglantimesaji.exec_()
+        self.openwindow()
 
 
     def baglan(self):
