@@ -1,0 +1,16 @@
+import scrapy
+
+class kitapyurdu(scrapy.Spider):
+    name = "kitap"
+    start_urls = [
+        'https://www.kitapyurdu.com/cok-satan-kitaplar/haftalik/1'
+    ]
+    def parse(self, response):
+        for icerik in response.css('div.product-grid'):
+            yield {
+                'kitapadi': icerik.css('div.name.ellipsis a span::text').extract(),
+                'yazaradi': icerik.css('div.author.compact.ellipsis a::text').extract()
+            }
+        next_page = response.css('div.links a.next::attr(href)').get()
+        if next_page is not None:
+            yield response.follow(next_page, callback=self.parse)
